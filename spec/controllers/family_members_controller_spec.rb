@@ -23,9 +23,7 @@ RSpec.describe FamilyMembersController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # FamilyMember. As you add validations to FamilyMember, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { { name: "Name", email: "name@example.com" } }
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
