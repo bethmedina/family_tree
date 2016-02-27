@@ -2,6 +2,15 @@
   <%= notice %>
 </p>
 
+<h2>
+  Name:
+  <%= @family_member.name %>
+</h2>
+
+<p>
+  <%= link_to 'Create a Relative', new_family_member_path %>
+</p>
+
 <% @family_member.messages.reverse.each do |message| %>
   <p><%= message.message_text %></p>
 <% end %>

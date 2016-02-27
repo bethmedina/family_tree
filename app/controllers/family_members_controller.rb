@@ -66,7 +66,7 @@ class FamilyMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_member_params
-      params.require(:family_member).permit(:name, :email, :message => [:message_text])
+      params.require(:family_member).permit(:name, :email, :relationship, :message => [:message_text])
     end
 
     def message_params
