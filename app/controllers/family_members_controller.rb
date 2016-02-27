@@ -40,14 +40,11 @@ class FamilyMembersController < ApplicationController
   # PATCH/PUT /family_members/1
   # PATCH/PUT /family_members/1.json
   def update
+    @family_member = FamilyMember.find(params[:id])
+    @family_member.messages.create(message_text: params[:family_member][:message][:message_text])
     respond_to do |format|
-      if @family_member.update(family_member_params)
-        format.html { redirect_to @family_member, notice: 'Family member was successfully updated.' }
-        format.json { render :show, status: :ok, location: @family_member }
-      else
-        format.html { render :edit }
-        format.json { render json: @family_member.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @family_member, notice: 'Family member message was successfully created.' }
+      format.json { render :show, status: :ok, location: @family_member }
     end
   end
 
@@ -69,6 +66,10 @@ class FamilyMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def family_member_params
-      params.require(:family_member).permit(:name, :email)
+      params.require(:family_member).permit(:name, :email, :message => [:message_text])
+    end
+
+    def message_params
+      params.require(:family_member).permit(:name, :email, :messages[:message_text])
     end
 end

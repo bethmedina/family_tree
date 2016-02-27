@@ -1,0 +1,24 @@
+<p id="notice">
+  <%= notice %>
+</p>
+
+<% @family_member.messages.reverse.each do |message| %>
+  <p><%= message.message_text %></p>
+<% end %>
+
+<p>
+  <%= link_to 'Edit', edit_family_member_path(@family_member) %>
+</p>
+
+<%= form_for @family_member do |f| %>
+  <strong>New Message:</strong>
+  <div>
+    <%= f.fields_for :message do |message_form| %>
+        <%= message_form.label :message_text %>:
+        <%= message_form.text_field :message_text %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit("Create New Message") %>
+  </div>
+<% end %>

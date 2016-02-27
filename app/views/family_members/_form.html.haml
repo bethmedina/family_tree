@@ -1,0 +1,19 @@
+= form_for(@family_member) do |f|
+  - if @family_member.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@family_member.errors.count, "error")
+        prohibited this family_member from being saved:
+      %ul
+        - @family_member.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :name
+    %br
+      = f.text_area :name
+  .field
+    = f.label :email
+    %br
+      = f.text_area :email
+  .actions
+    = f.submit
