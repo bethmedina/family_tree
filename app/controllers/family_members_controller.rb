@@ -48,6 +48,17 @@ class FamilyMembersController < ApplicationController
     end
   end
 
+  def create_relative
+    @family_member = FamilyMember.find(params[:id])
+    relative_params = params[:family_member][:relative]
+    @relative = FamilyMember.create!(name: relative_params[:name], email: relative_params[:email])
+    FamilyMember.set_relationship(@relative, relative_params[:relationship], @family_member)
+    respond_to do |format|
+      format.html { redirect_to @family_member, notice: 'Relative was successfully created.' }
+      format.json { render :show, status: :ok, location: @family_member }
+    end
+  end
+
   # DELETE /family_members/1
   # DELETE /family_members/1.json
   def destroy

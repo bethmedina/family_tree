@@ -7,10 +7,6 @@
   <%= @family_member.name %>
 </h2>
 
-<p>
-  <%= link_to 'Create a Relative', new_family_member_path %>
-</p>
-
 <% @family_member.messages.reverse.each do |message| %>
   <p><%= message.message_text %></p>
 <% end %>
@@ -18,6 +14,30 @@
 <p>
   <%= link_to 'Edit', edit_family_member_path(@family_member) %>
 </p>
+
+<%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
+  <strong>Create New Relative:</strong>
+  <div>
+    <%= f.fields_for :relative do |relative_form| %>
+      <div>
+        <%= relative_form.label :name %>
+        <%= relative_form.text_field :name %>
+      </div>
+      <div>
+        <%= relative_form.label :email %>
+        <%= relative_form.text_field :email %>
+      </div>
+      <div class="field">
+        <%= relative_form.label :relationship %>:<br>
+        <%= select_tag "relationship",
+            options_for_select(get_relationship_options(@family_member)) %>
+      </div>
+    <% end %>
+    <div class="actions">
+      <%= f.submit("Create New Relative") %>
+    </div>
+  </div>
+<% end %>
 
 <%= form_for @family_member do |f| %>
   <strong>New Message:</strong>
