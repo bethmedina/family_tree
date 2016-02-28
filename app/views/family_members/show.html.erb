@@ -2,19 +2,13 @@
   <%= notice %>
 </p>
 
-<h2>
-  Name:
-  <%= @family_member.name %>
-</h2>
+<div id='container'>
 
-<% @family_member.messages.reverse.each do |message| %>
-  <p><%= message.message_text %></p>
-<% end %>
+<h2><%= @family_member.name %></h2>
+<p><%= link_to 'Edit', edit_family_member_path(@family_member) %></p>
 
-<p>
-  <%= link_to 'Edit', edit_family_member_path(@family_member) %>
-</p>
-
+<div id='left'>
+<h3>Relationships</h3>
 <%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
   <strong>Create New Relative:</strong>
   <div>
@@ -38,6 +32,13 @@
     </div>
   </div>
 <% end %>
+</div>
+
+<div id='right'>
+<h3>Messages</h3>
+  <% @family_member.messages.reverse.each do |message| %>
+    <p><%= message.message_text %></p>
+  <% end %>
 
 <%= form_for @family_member do |f| %>
   <strong>New Message:</strong>
@@ -51,3 +52,6 @@
     <%= f.submit("Create New Message") %>
   </div>
 <% end %>
+</div>
+
+</div>
