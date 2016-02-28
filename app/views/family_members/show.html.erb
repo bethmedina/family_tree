@@ -4,11 +4,17 @@
 
 <div id='container'>
 
-<h2><%= @family_member.name %></h2>
+<h1><%= @family_member.name %></h1>
 <p><%= link_to 'Edit', edit_family_member_path(@family_member) %></p>
 
 <div id='left'>
-<h3>Relationships</h3>
+<h2>Relationships</h2>
+<h3>Children:</h3>
+<p>
+<% @family_member.children.each do |child| %>
+<%= child.name %><br>
+<% end %>
+</p>
 <%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
   <strong>Create New Relative:</strong>
   <div>
@@ -35,7 +41,7 @@
 </div>
 
 <div id='right'>
-<h3>Messages</h3>
+<h2>Messages</h2>
   <% @family_member.messages.reverse.each do |message| %>
     <p><%= message.message_text %></p>
   <% end %>
