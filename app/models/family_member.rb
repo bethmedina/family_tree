@@ -4,5 +4,6 @@ class FamilyMember < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :email, :presence => true
-  validates :relationship, :presence => true
+
+  acts_as_nested_set
 end
