@@ -6,20 +6,20 @@ module FamilyMembersHelper
     options
   end
 
-  def get_parents(family_member)
-    @family_member.parent != nil ? @family_member.parent.name : ''
+  def get_parents
+    @family_member.parent != nil ? @family_member.parent : nil
   end
 
-  def get_children(family_member)
-    @family_member.children != [] ? @family_member.children.map(&:name) : []
+  def get_children
+    @family_member.children != [] ? @family_member.children : []
   end
 
-  def get_grandparents(family_member)
-    @family_member.grandparent != nil ? @family_member.grandparent.name : ''
+  def get_grandparents
+    @family_member.grandparent != nil ? @family_member.grandparent : nil
   end
 
-  def get_grandchildren(family_member)
+  def get_grandchildren
     return [] if @family_member.grandchildren == nil
-    @family_member.grandchildren != [] ? @family_member.grandchildren.map(&:name) : []
+    @family_member.grandchildren != [] ? @family_member.grandchildren : []
   end
 end

@@ -10,11 +10,8 @@
       %tbody
       - @family_members.each do |family_member|
         %tr
-          %td= family_member.name
+          %td= link_to family_member.name, family_member
           %td= family_member.email
-          %td= link_to 'Show', family_member
-          %td= link_to 'Edit', edit_family_member_path(family_member)
-          %td= link_to 'Destroy', family_member, method: :delete, data: { confirm: 'Are you sure?' }
 
 %p
   =link_to 'Create New Family Member', new_family_member_path

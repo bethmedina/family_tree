@@ -10,19 +10,23 @@
   <div id='left'>
     <h2>Relationships</h2>
     <h3>Grandparent:</h3>
-      <%= get_grandparents(@family_member) %>
+      <% if get_grandparents %>
+        <%= link_to get_grandparents.name, get_grandparents %>
+      <% end %>
     <h3>Parent:</h3>
-      <%= get_parents(@family_member) %>
+      <% if get_parents %>
+        <%= link_to get_parents.name, get_parents %>
+      <% end %>
     <h3>Children:</h3>
       <p>
-      <% get_children(@famiy_member).each do |child| %>
-        <%= child %><br>
+      <% get_children.each do |child| %>
+        <%= link_to child.name, child %><br>
       <% end %>
       </p>
     <h3>Grandchildren:</h3>
     <p>
-      <% get_grandchildren(@family_member).each do |grandchild| %>
-        <%= grandchild %><br>
+      <% get_grandchildren.each do |grandchild| %>
+        <%= link_to grandchild.name, grandchild %><br>
       <% end %>
     </p>
     <%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
