@@ -1,6 +1,11 @@
 // Place all the styles related to the FamilyMembers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#container
+    {
+      width: 100%;
+    }
+
 #left
     {
       width: 500px;
@@ -9,5 +14,5 @@
 
 #right
     {
-      margin-left: 500px; /* Change this to whatever the width of your left column is*/
+      margin-left: 500px;
     }
