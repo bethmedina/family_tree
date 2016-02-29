@@ -5,6 +5,11 @@ class FamilyMembersController < ApplicationController
   # GET /family_members.json
   def index
     @family_members = FamilyMember.all
+    if params[:search]
+      @family_members = FamilyMember.search(params[:search]).order("created_at DESC")
+    else
+      @family_members = FamilyMember.all.order("created_at DESC")
+    end
   end
 
   # GET /family_members/1

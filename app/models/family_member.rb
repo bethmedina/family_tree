@@ -29,6 +29,10 @@ class FamilyMember < ActiveRecord::Base
     self.parent != nil ? self.parent.parent : nil
   end
 
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%") 
+  end
+
   private
 
   def self.set_as_child(relative, family_member)

@@ -1,17 +1,27 @@
 %p{:id => "notice"}= notice
 %h1 Family Tree
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Email
-      %th{:colsapn => "3"}
-      %tbody
-      - @family_members.each do |family_member|
-        %tr
-          %td= link_to family_member.name, family_member
-          %td= family_member.email
+= form_tag family_members_path, method: 'get' do
+  %p
+    = text_field_tag :search
+    = submit_tag "Search"
+
+- if @family_members.present?
+  %table
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th{:colsapn => "3"}
+        %tbody
+        - @family_members.each do |family_member|
+          %tr
+            %td= link_to family_member.name, family_member
+            %td= family_member.email
+- else
+  %p
+    There are no Family Members whose names resemble the term(s) #{params[:search]}.
+
 
 %p
   =link_to 'Create New Family Member', new_family_member_path
