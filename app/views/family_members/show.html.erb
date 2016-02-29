@@ -4,60 +4,70 @@
 
 <div id='container'>
 
-<h1><%= @family_member.name %></h1>
-<p><%= link_to 'Edit', edit_family_member_path(@family_member) %></p>
+  <h1><%= @family_member.name %></h1>
+  <p><%= link_to 'Back', family_members_path %></p>
 
-<div id='left'>
-<h2>Relationships</h2>
-<h3>Children:</h3>
-<p>
-<% @family_member.children.each do |child| %>
-<%= child.name %><br>
-<% end %>
-</p>
-<%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
-  <strong>Create New Relative:</strong>
-  <div>
-    <%= f.fields_for :relative do |relative_form| %>
+  <div id='left'>
+    <h2>Relationships</h2>
+    <h3>Grandparent:</h3>
+      <%= get_grandparents(@family_member) %>
+    <h3>Parent:</h3>
+      <%= get_parents(@family_member) %>
+    <h3>Children:</h3>
+      <p>
+      <% get_children(@famiy_member).each do |child| %>
+        <%= child %><br>
+      <% end %>
+      </p>
+    <h3>Grandchildren:</h3>
+    <p>
+      <% get_grandchildren(@family_member).each do |grandchild| %>
+        <%= grandchild %><br>
+      <% end %>
+    </p>
+    <%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
+      <strong>Create New Relative:</strong>
       <div>
-        <%= relative_form.label :name %>
-        <%= relative_form.text_field :name %>
-      </div>
-      <div>
-        <%= relative_form.label :email %>
-        <%= relative_form.text_field :email %>
-      </div>
-      <div class="field">
-        <%= relative_form.label :relationship %>:<br>
-        <%= select_tag "relationship",
-            options_for_select(get_relationship_options(@family_member)) %>
+        <%= f.fields_for :relative do |relative_form| %>
+          <div>
+            <%= relative_form.label :name %>:
+            <%= relative_form.text_field :name %>
+          </div>
+          <div>
+            <%= relative_form.label :email %>:
+            <%= relative_form.text_field :email %>
+          </div>
+          <div class="field">
+            <%= relative_form.label :relationship %>:
+            <%= select_tag "relationship",
+                options_for_select(get_relationship_options(@family_member)) %>
+          </div>
+        <% end %>
+        <div class="actions">
+          <%= f.submit("Create New Relative") %>
+        </div>
       </div>
     <% end %>
-    <div class="actions">
-      <%= f.submit("Create New Relative") %>
+  </div>
+
+  <div id='right'>
+  <h2>Messages</h2>
+    <% @family_member.messages.reverse.each do |message| %>
+      <p><%= message.message_text %></p>
+    <% end %>
+
+  <%= form_for @family_member do |f| %>
+    <strong>New Message:</strong>
+    <div>
+      <%= f.fields_for :message do |message_form| %>
+          <%= message_form.label :message_text %>:
+          <%= message_form.text_field :message_text %>
+      <% end %>
     </div>
-  </div>
-<% end %>
-</div>
-
-<div id='right'>
-<h2>Messages</h2>
-  <% @family_member.messages.reverse.each do |message| %>
-    <p><%= message.message_text %></p>
+    <div class="actions">
+      <%= f.submit("Create New Message") %>
+    </div>
   <% end %>
-
-<%= form_for @family_member do |f| %>
-  <strong>New Message:</strong>
-  <div>
-    <%= f.fields_for :message do |message_form| %>
-        <%= message_form.label :message_text %>:
-        <%= message_form.text_field :message_text %>
-    <% end %>
   </div>
-  <div class="actions">
-    <%= f.submit("Create New Message") %>
-  </div>
-<% end %>
-</div>
 
 </div>
