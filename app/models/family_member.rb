@@ -17,7 +17,6 @@ class FamilyMember < ActiveRecord::Base
       set_as_grandparent(relative, family_member)
     when :grandchild
       set_as_grandchild(relative, family_member)
-    else
     end
   end
 
