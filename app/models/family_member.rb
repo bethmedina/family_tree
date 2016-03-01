@@ -31,7 +31,7 @@ class FamilyMember < ActiveRecord::Base
   end
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%")
+    where("lower(name) LIKE ?", "%#{search.downcase}%")
   end
 
   private
