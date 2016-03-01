@@ -8,14 +8,14 @@ class FamilyMember < ActiveRecord::Base
   validates :email, :presence => true
 
   def self.set_relationship(relative, relationship, family_member)
-    case relationship
-    when "Parent"
+    case relationship.downcase.to_sym
+    when :parent
       set_as_parent(relative, family_member)
-    when "Child"
+    when :child
       set_as_child(relative, family_member)
-    when "Grandparent"
+    when :grandparent
       set_as_grandparent(relative, family_member)
-    when "Grandchild"
+    when :grandchild
       set_as_grandchild(relative, family_member)
     else
     end
