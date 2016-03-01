@@ -1,0 +1,59 @@
+%p#notice
+  = notice
+#container
+  %h1= @family_member.name
+  %p
+    (has
+    %strong= count_relationships
+    family members)
+    %p= link_to 'Back', family_members_path
+    #left
+      %h2 Relationships
+      %h3 Grandparent:
+      - if @family_member.grandparent
+        = link_to @family_member.grandparent.name, @family_member.grandparent
+      %h3 Parent:
+      - if @family_member.parent
+        = link_to @family_member.parent.name, @family_member.parent
+      %h3 Children:
+      %p
+        - @family_member.children.each do |child|
+          = link_to child.name, child
+          %br
+      %h3 Grandchildren:
+      %p
+        - if @family_member.grandchildren
+          - @family_member.grandchildren.each do |grandchild|
+            = link_to grandchild.name, grandchild
+            %br
+      = form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f|
+        %strong Create New Relative:
+        %div
+          = f.fields_for :relative do |relative_form|
+            %div
+              = relative_form.label :name
+              \:
+              \#{relative_form.text_field :name}
+            %div
+              = relative_form.label :email
+              \:
+              \#{relative_form.text_field :email}
+            .field
+              = relative_form.label :relationship
+              \:
+              \#{select_tag "relationship", options_for_select(get_relationship_options(@family_member))}
+          .actions
+            = f.submit("Create New Relative")
+    #right
+      %h2 Messages
+      - @family_member.messages.reverse.each do |message|
+        %p= message.message_text
+      = form_for @family_member do |f|
+        %strong New Message:
+        %div
+          = f.fields_for :message do |message_form|
+            = message_form.label :message_text
+            \:
+            \#{message_form.text_field :message_text}
+        .actions
+          = f.submit("Create New Message")
