@@ -10,15 +10,3 @@
 Optional: Add an integration to the API of your choice (twitter, trello, hipchat, slack) to announce a new family member created.
 
 Preferred: Use HAML for the views and Postgres for the database. Post to a bitbucket, github, or send zip files including .git file with commit history along with a link to the demo application.
-
-##Notes
-
-I am having a problem in family_member.rb. When I call @person.grandparent from the app
-all is well, but if I call @person.grandparent from the console I get a NoMethodError
-if @person does not have a parent or grandparent. Got sick of fiddling w/ that
-last night and haven't looked at it yet today.
-
-I know I need more tests.
-
-I want to get this over to them ASAP. How much time do you think I ought to spend
-trying to get this to be better? Time is of the essence. They need to hire someone.
