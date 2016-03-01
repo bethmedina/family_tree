@@ -77,8 +77,6 @@ class FamilyMembersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_family_member
-      puts "*********************************************************"
-      puts params
       @family_member = FamilyMember.find(params[:id])
     end
 

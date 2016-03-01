@@ -5,6 +5,7 @@
 <div id='container'>
 
   <h1><%= @family_member.name %></h1>
+  <p>(has <strong><%= count_relationships %></strong> family members)
   <p><%= link_to 'Back', family_members_path %></p>
 
   <div id='left'>

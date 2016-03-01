@@ -26,11 +26,12 @@ class FamilyMember < ActiveRecord::Base
   end
 
   def grandparent
-    self.parent != nil ? self.parent.parent : nil
+    return nil if self.parent.blank?
+    self.parent.parent
   end
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%") 
+    where("name LIKE ?", "%#{search}%")
   end
 
   private
