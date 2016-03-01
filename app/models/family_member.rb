@@ -22,12 +22,12 @@ class FamilyMember < ActiveRecord::Base
   end
 
   def grandchildren
-    self.children != [] ? self.children.first.children : nil
+    self.children.first.children unless self.children.blank?
   end
 
   def grandparent
     return nil if self.parent.blank?
-    self.parent.parent
+    self.parent.parent unless self.parent.nil?
   end
 
   def self.search(search)
