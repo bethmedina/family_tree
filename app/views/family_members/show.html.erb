@@ -11,22 +11,22 @@
   <div id='left'>
     <h2>Relationships</h2>
     <h3>Grandparent:</h3>
-      <% if get_grandparents %>
-        <%= link_to get_grandparents.name, get_grandparents %>
+      <% if @family_member.grandparent %>
+        <%= link_to @family_member.grandparent.name, @family_member.grandparent %>
       <% end %>
     <h3>Parent:</h3>
-      <% if get_parents %>
-        <%= link_to get_parents.name, get_parents %>
+      <% if @family_member.parent %>
+        <%= link_to @family_member.parent.name, @family_member.parent %>
       <% end %>
     <h3>Children:</h3>
       <p>
-      <% get_children.each do |child| %>
+      <% @family_member.children.each do |child| %>
         <%= link_to child.name, child %><br>
       <% end %>
       </p>
     <h3>Grandchildren:</h3>
     <p>
-      <% get_grandchildren.each do |grandchild| %>
+      <% @family_member.grandchildren.each do |grandchild| %>
         <%= link_to grandchild.name, grandchild %><br>
       <% end %>
     </p>
