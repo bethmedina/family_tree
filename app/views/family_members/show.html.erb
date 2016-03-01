@@ -26,8 +26,10 @@
       </p>
     <h3>Grandchildren:</h3>
     <p>
-      <% @family_member.grandchildren.each do |grandchild| %>
-        <%= link_to grandchild.name, grandchild %><br>
+      <% if @family_member.grandchildren %>
+        <% @family_member.grandchildren.each do |grandchild| %>
+          <%= link_to grandchild.name, grandchild %><br>
+        <% end %>
       <% end %>
     </p>
     <%= form_for @family_member, :url => url_for(:controller => 'family_members', :action => 'create_relative'), :method => :POST do |f| %>
